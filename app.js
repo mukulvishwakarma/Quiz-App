@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const { Router } = require('./api/routes')
 
 dotenv.config();
 const app = express();
@@ -9,6 +10,9 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+//Router
+app.use('/api', Router)
 
 
 // Handle 404 error
