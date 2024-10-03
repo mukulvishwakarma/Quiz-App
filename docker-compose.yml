@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8082:8082"  # Expose port 8082 on the host
+    environment:
+      - PORT=8082
+      - MONGODB_URI=mongodb://localhost:27017/quizApp  # MongoDB connection string
+    volumes:
+      -  ./src:/usr/src/app   # This refers to the src directory on your host machine
+
+  db:
+    image: mongo:latest  # Use the official MongoDB image
+    ports:
+      - "27017:27017"  # Expose port 27017 on the host
+    volumes:
+      - mongo-data:/data/db  # Persist MongoDB data
+
+volumes:
+  mongo-data:
